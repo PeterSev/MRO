@@ -1554,6 +1554,7 @@
             this.radA5_9_DTK.TabStop = true;
             this.radA5_9_DTK.Text = "ДТК";
             this.radA5_9_DTK.UseVisualStyleBackColor = true;
+            this.radA5_9_DTK.CheckedChanged += new System.EventHandler(this.radA5_9_DTK_CheckedChanged);
             this.radA5_9_DTK.Click += new System.EventHandler(this.radA5_9_Click);
             // 
             // btnA5_8
@@ -2298,7 +2299,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MRO v.3.33 AnyCPU";
+            this.Text = "MRO v.3.4 AnyCPU";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);

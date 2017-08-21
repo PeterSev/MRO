@@ -870,6 +870,14 @@ namespace MRO
             SendMessage(Devices[selectedIndex], devPKP_BU, a5_7);
         }
 
+        private void radA5_9_DTK_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radA5_9_DTK.Checked)
+                radA5_9_OPZ.Checked = true;
+            else
+                radA5_9_SHPZ.Checked = true;
+        }
+
         private void radA5_9_Click(object sender, EventArgs e)
         {
             a5_9.Data[0] = 0;
@@ -1068,34 +1076,110 @@ namespace MRO
                 if (state.buttons[0] != lastJoystickStateButtons[0] && state.buttons[0]) A5_27_Process(); //выполняем команду Измерить дальность
                 if (state.buttons[1] != lastJoystickStateButtons[1]) 
                     if(state.buttons[1])
-                        chkA5_41.Checked = true;  //включаем фиксацию (имитируем нажатие чекбокса)
-                if (state.buttons[2] != lastJoystickStateButtons[2]) 
-                    if(state.buttons[2])
-                        chkA5_41.Checked = false; //выключаем фиксацию
-                if (state.buttons[3] != lastJoystickStateButtons[3])   //уменьшаем фокус.
+                        chkA5_41.Checked = !chkA5_41.Checked; ;  //включаем фиксацию (имитируем нажатие чекбокса)
+                if (state.buttons[2] != lastJoystickStateButtons[2]) //Шагаем вправо по ШПЗ/УПЗ/ОПЗ
+                    if (state.buttons[2])
+                    {
+                        if (radA5_9_DTK.Checked)
+                        {
+                            if (radA5_9_SHPZ.Checked)
+                            {
+                                radA5_9_2.Checked = false;
+                                radA5_9_UPZ.Checked = true;
+                            }
+                            else if (radA5_9_UPZ.Checked)
+                                //radA5_9_OPZ.Checked = true;
+                                if (!radA5_9_2.Checked)
+                                    radA5_9_2.Checked = true;
+                                else
+                                {
+                                    radA5_9_1.Checked = true;
+                                    radA5_9_OPZ.Checked = true;
+                                }
+                            else if (radA5_9_OPZ.Checked)
+                            {
+                                radA5_9_2.Checked = false;
+                                radA5_9_SHPZ.Checked = true;
+                            }
+                        }
+                        else
+                        {
+                            if (radA5_9_SHPZ.Checked)
+                            {
+                                radA5_9_2.Checked = false;
+                                radA5_9_UPZ.Checked = true;
+                            }
+                            else if (radA5_9_UPZ.Checked)
+                                //radA5_9_OPZ.Checked = true;
+                                if (!radA5_9_2.Checked)
+                                    radA5_9_2.Checked = true;
+                                else
+                                {
+                                    radA5_9_1.Checked = true;
+                                    radA5_9_SHPZ.Checked = true;
+                                }
+                        }
+
+                        A5_9_Process();
+                    }
+
+                if (state.buttons[3] != lastJoystickStateButtons[3])   //Меняем канал ДТК или ТПВК.
                 {
                     if (state.buttons[3])
                     {
-                        _frmPU.chkA5_20_Umen.Tag = true;
-                        A5_20_Process();
-                    }
-                    else
-                    {
-                        _frmPU.chkA5_20_Umen.Tag = false;
-                        A5_20_Process();
+                        if (radA5_9_DTK.Checked)
+                            radA5_9_TPVK.Checked = true;
+                        else
+                            radA5_9_DTK.Checked = true;
+
+                        A5_9_Process();
                     }
                 }
-                if (state.buttons[4] != lastJoystickStateButtons[4])   //увеличиваем фокус
+                if (state.buttons[4] != lastJoystickStateButtons[4])   //Шагаем влево по ШПЗ/УПЗ/ОПЗ
                 {
                     if (state.buttons[4])
                     {
-                        _frmPU.chkA5_20_Uvel.Tag = true;
-                        A5_20_Process();
-                    }
-                    else
-                    {
-                        _frmPU.chkA5_20_Uvel.Tag = false;
-                        A5_20_Process();
+                        if (radA5_9_DTK.Checked)
+                        {
+                            if (radA5_9_SHPZ.Checked)
+                            {
+                                radA5_9_2.Checked = false;
+                                radA5_9_OPZ.Checked = true;
+                            }
+                            else if (radA5_9_UPZ.Checked)
+                            {
+                                if (radA5_9_2.Checked)
+                                {
+                                    radA5_9_1.Checked = true;
+                                }
+                                else
+                                    radA5_9_SHPZ.Checked = true;
+                            }
+                            else if (radA5_9_OPZ.Checked)
+                            {
+                                radA5_9_2.Checked = true;
+                                radA5_9_UPZ.Checked = true;
+                            }
+                        }
+                        else
+                        {
+                            if (radA5_9_SHPZ.Checked)
+                            {
+                                radA5_9_2.Checked = true;
+                                radA5_9_UPZ.Checked = true;
+                            }
+                            else if (radA5_9_UPZ.Checked)
+                                //radA5_9_OPZ.Checked = true;
+                                if (!radA5_9_2.Checked)
+                                    radA5_9_SHPZ.Checked = true;
+                                else
+                                {
+                                    radA5_9_1.Checked = true;
+
+                                }
+                        }
+
+                        A5_9_Process();
                     }
                 }
 
@@ -1141,6 +1225,12 @@ namespace MRO
                     trackA5_30_Vert.Value = -1*valV;
                 }
             });
+        }
+
+        void A5_9_Process()
+        {
+            //radA5_9_DTK.Checked = !radA5_9_DTK.Checked;
+            radA5_9_Click(null, null);
         }
 
         void myJoystick_msgAppeared(string str)
