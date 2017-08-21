@@ -1481,10 +1481,12 @@
             // radA5_9_OPZ
             // 
             this.radA5_9_OPZ.AutoSize = true;
+            this.radA5_9_OPZ.Checked = true;
             this.radA5_9_OPZ.Location = new System.Drawing.Point(201, 3);
             this.radA5_9_OPZ.Name = "radA5_9_OPZ";
             this.radA5_9_OPZ.Size = new System.Drawing.Size(48, 17);
             this.radA5_9_OPZ.TabIndex = 1;
+            this.radA5_9_OPZ.TabStop = true;
             this.radA5_9_OPZ.Text = "ОПЗ";
             this.radA5_9_OPZ.UseVisualStyleBackColor = true;
             this.radA5_9_OPZ.Click += new System.EventHandler(this.radA5_9_Click);
@@ -1503,12 +1505,10 @@
             // radA5_9_SHPZ
             // 
             this.radA5_9_SHPZ.AutoSize = true;
-            this.radA5_9_SHPZ.Checked = true;
             this.radA5_9_SHPZ.Location = new System.Drawing.Point(93, 4);
             this.radA5_9_SHPZ.Name = "radA5_9_SHPZ";
             this.radA5_9_SHPZ.Size = new System.Drawing.Size(49, 17);
             this.radA5_9_SHPZ.TabIndex = 1;
-            this.radA5_9_SHPZ.TabStop = true;
             this.radA5_9_SHPZ.Text = "ШПЗ";
             this.radA5_9_SHPZ.UseVisualStyleBackColor = true;
             this.radA5_9_SHPZ.Click += new System.EventHandler(this.radA5_9_Click);

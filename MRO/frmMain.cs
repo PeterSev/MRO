@@ -1077,29 +1077,37 @@ namespace MRO
                 if (state.buttons[1] != lastJoystickStateButtons[1]) 
                     if(state.buttons[1])
                         chkA5_41.Checked = !chkA5_41.Checked; ;  //включаем фиксацию (имитируем нажатие чекбокса)
-                if (state.buttons[2] != lastJoystickStateButtons[2]) //Шагаем вправо по ШПЗ/УПЗ/ОПЗ
+                if (state.buttons[2] != lastJoystickStateButtons[2]) //Шагаем вправо по ШПЗ/УПЗ/УПЗ2/ОПЗ
                     if (state.buttons[2])
                     {
                         if (radA5_9_DTK.Checked)
                         {
                             if (radA5_9_SHPZ.Checked)
                             {
-                                radA5_9_2.Checked = false;
+                                radA5_9_1.Checked = true;
+                                
                                 radA5_9_UPZ.Checked = true;
                             }
                             else if (radA5_9_UPZ.Checked)
-                                //radA5_9_OPZ.Checked = true;
-                                if (!radA5_9_2.Checked)
-                                    radA5_9_2.Checked = true;
-                                else
+                            { 
+                                if (radA5_9_1.Checked)
                                 {
-                                    radA5_9_1.Checked = true;
-                                    radA5_9_OPZ.Checked = true;
+                                    radA5_9_16.Checked = true;
                                 }
+                                else if (radA5_9_16.Checked)
+                                {
+                                    radA5_9_32.Checked = true;
+                                }
+                                else if (radA5_9_32.Checked)
+                                {
+                                    radA5_9_OPZ.Checked = true;
+                                    radA5_9_1.Checked = true;
+                                }
+                            }
                             else if (radA5_9_OPZ.Checked)
                             {
-                                radA5_9_2.Checked = false;
                                 radA5_9_SHPZ.Checked = true;
+                                radA5_9_16.Checked = true;
                             }
                         }
                         else
@@ -1110,7 +1118,6 @@ namespace MRO
                                 radA5_9_UPZ.Checked = true;
                             }
                             else if (radA5_9_UPZ.Checked)
-                                //radA5_9_OPZ.Checked = true;
                                 if (!radA5_9_2.Checked)
                                     radA5_9_2.Checked = true;
                                 else
@@ -1135,7 +1142,7 @@ namespace MRO
                         A5_9_Process();
                     }
                 }
-                if (state.buttons[4] != lastJoystickStateButtons[4])   //Шагаем влево по ШПЗ/УПЗ/ОПЗ
+                if (state.buttons[4] != lastJoystickStateButtons[4])   //Шагаем влево по ШПЗ/УПЗ/УПЗ2/ОПЗ
                 {
                     if (state.buttons[4])
                     {
@@ -1143,21 +1150,28 @@ namespace MRO
                         {
                             if (radA5_9_SHPZ.Checked)
                             {
-                                radA5_9_2.Checked = false;
+                                radA5_9_1.Checked = true;
                                 radA5_9_OPZ.Checked = true;
                             }
                             else if (radA5_9_UPZ.Checked)
                             {
-                                if (radA5_9_2.Checked)
+                                if (radA5_9_32.Checked)
+                                {
+                                    radA5_9_16.Checked = true;
+                                }
+                                else if (radA5_9_16.Checked)
                                 {
                                     radA5_9_1.Checked = true;
                                 }
-                                else
+                                else if (radA5_9_1.Checked)
+                                {
+                                    radA5_9_16.Checked = true;
                                     radA5_9_SHPZ.Checked = true;
+                                }
                             }
                             else if (radA5_9_OPZ.Checked)
                             {
-                                radA5_9_2.Checked = true;
+                                radA5_9_32.Checked = true;
                                 radA5_9_UPZ.Checked = true;
                             }
                         }
